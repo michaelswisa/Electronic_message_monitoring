@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey
-
-from sqlalchemy.orm import declarative_base, relationship, backref
-
-Base = declarative_base()
+from sqlalchemy.orm import relationship
+from database import Base
 
 
 class Email(Base):

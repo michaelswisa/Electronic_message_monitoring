@@ -1,7 +1,7 @@
 from kafka import KafkaConsumer
 import json
-from explos_consumer.database import db_session, init_db
-from models import Email, Location, DeviceInfo, Sentence
+from database import db_session, init_db
+from explos_consumer.models import Email, Location, DeviceInfo, Sentence
 from datetime import datetime
 
 
