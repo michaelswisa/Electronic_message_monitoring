@@ -20,3 +20,5 @@ for message in consumer:
     transaction = message.value
     collection.insert_one(transaction)
     print(f"Stored high-value transaction: {transaction}")
+
+
