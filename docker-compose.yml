@@ -66,14 +66,14 @@ services:
 #      mongodb:
 #        condition: service_healthy
 #
-#  high-value-consumer:
-#    build: ./high-value-consumer
-#    container_name: high-value-consumer
-#    depends_on:
-#      kafka:
-#        condition: service_healthy
-#      mongodb:
-#          condition: service_healthy
+  messages-all-consumer:
+    build: ./messages-all-consumer
+    container_name: messages-all-consumer
+    depends_on:
+      kafka:
+        condition: service_healthy
+      mongodb:
+          condition: service_healthy
 #
 #  transaction-logger:
 #    build: ./transaction-logger
