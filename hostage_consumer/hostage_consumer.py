@@ -8,10 +8,10 @@ from datetime import datetime
 init_db()
 
 consumer = KafkaConsumer(
-    'messages.explos',
+    'messages.hostage',
     bootstrap_servers=['kafka:9092'],
     auto_offset_reset='earliest',
-    group_id='explos_group',
+    group_id='hostage_group',
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
 )
 
