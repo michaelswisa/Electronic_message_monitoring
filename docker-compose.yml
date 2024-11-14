@@ -40,6 +40,22 @@ services:
       timeout: 5s
       retries: 5
 
+  db-sql:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: michael
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: explos_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   receiving_emails:
     build: ./receiving_emails
     container_name: receiving_emails
@@ -54,22 +70,16 @@ services:
       kafka:
         condition: service_healthy
 
-  #  stream-processor:
-  #    build: ./stream-processor
-  #    container_name: stream-processor
-  #    depends_on:
-  #      kafka:
-  #        condition: service_healthy
-  #
-  #  fraud-consumer:
-  #    build: ./fraud-consumer
-  #    container_name: fraud-consumer
-  #    depends_on:
-  #      kafka:
-  #        condition: service_healthy
-  #      mongodb:
-  #        condition: service_healthy
-  #
+  explos_consumer:
+    build: ./explos_consumer
+    container_name: explos_consumer
+    depends_on:
+      kafka:
+        condition: service_healthy
+      db-sql:
+        condition: service_healthy
+
+
   messages-all-consumer:
     build: ./messages-all-consumer
     container_name: messages-all-consumer
